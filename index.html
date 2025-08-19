@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบสั่งซื้อเครื่องดื่ม</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Kanit', sans-serif; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .coffee-item {
+            transition: transform 0.2s;
+        }
+        .coffee-item:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-orange-100 min-h-screen">
+    <!-- หน้า Welcome -->
+    <div id="welcome-page" class="page active">
+        <div class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+            <!-- พื้นหลังรูปภาพ -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+                 style="background-image: url('https://img5.pic.in.th/file/secure-sv1/LINE_ALBUM_1082025_250810_30.jpg');">
+                <div class="absolute inset-0 bg-white/60"></div>
+            </div>
+            
+            <!-- โลโก้ด้านบน -->
+            <div class="relative z-10 mb-8">
+                <img src="https://img5.pic.in.th/file/secure-sv1/28310.png" 
+                     alt="Logo" 
+                     class="w-[300px] h-[300px] object-contain mx-auto">
+            </div>
+            
+            <div class="bg-white/50 backdrop-blur-sm rounded-3xl shadow-2xl p-12 text-center max-w-md w-full relative z-10">
+                <div class="text-6xl mb-6">☕</div>
+                <h1 class="text-4xl font-bold text-amber-800 mb-4">ยินดีต้อนรับ</h1>
+                <p class="text-gray-600 mb-8 text-lg">ระบบสั่งซื้อเครื่องดื่มออนไลน์</p>
+                <button onclick="showPage('login-page')" 
+                        class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-colors w-full">
+                    เข้าสู่ระบบ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้า Login -->
+    <div id="login-page" class="page">
+        <div class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
+            <!-- พื้นหลังรูปภาพ -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+                 style="background-image: url('https://img2.pic.in.th/pic/LINE_ALBUM_1082025_250810_22.jpg');">
+                <div class="absolute inset-0 bg-white/60"></div>
+            </div>
+            
+            <!-- โลโก้ด้านบน -->
+            <div class="relative z-10 mb-8">
+                <img src="https://img5.pic.in.th/file/secure-sv1/28310.png" 
+                     alt="Logo" 
+                     class="w-[300px] h-[300px] object-contain mx-auto">
+            </div>
+            
+            <div class="bg-white/50 backdrop-blur-sm rounded-3xl shadow-2xl p-8 max-w-md w-full relative z-10">
+                <div class="text-center mb-8">
+                    <div class="text-4xl mb-4">🔐</div>
+                    <h2 class="text-3xl font-bold text-amber-800">เข้าสู่ระบบ</h2>
+                </div>
+                
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">ชื่อผู้ใช้</label>
+                        <input type="text" id="login-username" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                               placeholder="กรอกชื่อผู้ใช้" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">รหัสผ่าน</label>
+                        <input type="password" id="login-password" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                               placeholder="กรอกรหัสผ่าน" required>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 rounded-lg transition-colors">
+                        เข้าสู่ระบบ
+                    </button>
+                </form>
+                
+                <div class="text-center mt-6">
+                    <p class="text-gray-600">ยังไม่มีบัญชี?</p>
+                    <button onclick="showPage('register-page')" 
+                            class="text-amber-600 hover:text-amber-700 font-medium">
+                        สมัครสมาชิก
+                    </button>
+                </div>
+                
+                <!-- ข้อมูลทดสอบ -->
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">🔑 บัญชีทดสอบ:</h4>
+                    <div class="text-sm text-blue-700 space-y-1">
+                        <div><strong>demo</strong> / demo123</div>
+                        <div><strong>test</strong> / test456</div>
+                        <div><strong>user1</strong> / password</div>
+                        <div><strong>admin</strong> / 123456</div>
+                    </div>
+                </div>
+                
+                <button onclick="showPage('welcome-page')" 
+                        class="mt-4 text-gray-500 hover:text-gray-700 text-sm">
+                    ← กลับหน้าแรก
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าสมัครสมาชิก -->
+    <div id="register-page" class="page">
+        <div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-green-50 to-blue-50">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full">
+                <div class="text-center mb-8">
+                    <div class="text-4xl mb-4">📝</div>
+                    <h2 class="text-3xl font-bold text-amber-800">สมัครสมาชิก</h2>
+                </div>
+                
+                <form id="register-form" class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">ชื่อผู้ใช้</label>
+                        <input type="text" id="reg-username" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                               placeholder="กรอกชื่อผู้ใช้" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">รหัสผ่าน</label>
+                        <input type="password" id="reg-password" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                               placeholder="กรอกรหัสผ่าน" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">ชื่อลูกค้า</label>
+                        <input type="text" id="reg-customer-name" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                               placeholder="กรอกชื่อจริง" required>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors">
+                        สมัครสมาชิก
+                    </button>
+                </form>
+                
+                <div class="text-center mt-6">
+                    <button onclick="showPage('login-page')" 
+                            class="text-amber-600 hover:text-amber-700 font-medium">
+                        ← กลับไปเข้าสู่ระบบ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าเมนูสั่งซื้อ -->
+    <div id="menu-page" class="page">
+        <div class="min-h-screen p-4 relative overflow-hidden">
+            <!-- พื้นหลังรูปภาพ -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+                 style="background-image: url('https://img2.pic.in.th/pic/28310.png');">
+                <div class="absolute inset-0 bg-white/70"></div>
+            </div>
+            <div class="max-w-6xl mx-auto relative z-10">
+                <!-- Header -->
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-8">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-3xl font-bold text-amber-800">เมนูเครื่องดื่ม</h1>
+                            <p class="text-gray-600">สวัสดี <span id="customer-name-display"></span></p>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button onclick="showCartPage()" 
+                                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
+                                🛒 ตะกร้า (<span id="cart-count">0</span>)
+                            </button>
+                            <button onclick="logout()" 
+                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                                ออกจากระบบ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- เมนูเครื่องดื่ม -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 mb-8">
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">☕</div>
+                        <h3 class="text-sm font-semibold mb-1">กาแฟดำ</h3>
+                        <p class="text-gray-600 mb-2 text-xs">45 บาท</p>
+                        
+                        <!-- ช่องเลือกความหวาน -->
+                        <div class="mb-2">
+                            <select id="coffee1-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <!-- ช่องเพิ่มเติม -->
+                        <div class="mb-2">
+                            <input type="text" id="coffee1-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee1', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee1-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee1', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee1')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🥛</div>
+                        <h3 class="text-sm font-semibold mb-1">กาแฟนม</h3>
+                        <p class="text-gray-600 mb-2 text-xs">55 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee2-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee2-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee2', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee2-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee2', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee2')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">❄️</div>
+                        <h3 class="text-sm font-semibold mb-1">กาแฟเย็น</h3>
+                        <p class="text-gray-600 mb-2 text-xs">50 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee3-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee3-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee3', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee3-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee3', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee3')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🍵</div>
+                        <h3 class="text-sm font-semibold mb-1">ชาเขียว</h3>
+                        <p class="text-gray-600 mb-2 text-xs">40 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee4-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee4-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee4', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee4-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee4', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee4')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🥤</div>
+                        <h3 class="text-sm font-semibold mb-1">ชาไทย</h3>
+                        <p class="text-gray-600 mb-2 text-xs">35 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee5-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee5-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee5', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee5-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee5', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee5')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🧋</div>
+                        <h3 class="text-sm font-semibold mb-1">ชานมไข่มุก</h3>
+                        <p class="text-gray-600 mb-2 text-xs">65 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee6-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee6-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee6', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee6-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee6', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee6')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🍫</div>
+                        <h3 class="text-sm font-semibold mb-1">ช็อกโกแลต</h3>
+                        <p class="text-gray-600 mb-2 text-xs">60 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee7-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee7-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee7', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee7-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee7', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee7')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🍃</div>
+                        <h3 class="text-sm font-semibold mb-1">มัทฉะลาเต้</h3>
+                        <p class="text-gray-600 mb-2 text-xs">70 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee8-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee8-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee8', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee8-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee8', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee8')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🍋</div>
+                        <h3 class="text-sm font-semibold mb-1">ชามะนาว</h3>
+                        <p class="text-gray-600 mb-2 text-xs">30 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee9-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee9-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee9', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee9-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee9', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee9')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+
+                    <div class="coffee-item bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-3 text-center border border-gray-100">
+                        <div class="text-3xl mb-2">🥃</div>
+                        <h3 class="text-sm font-semibold mb-1">เอสเปรสโซ่</h3>
+                        <p class="text-gray-600 mb-2 text-xs">55 บาท</p>
+                        
+                        <div class="mb-2">
+                            <select id="coffee10-sweetness" class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="หวานน้อย">หวานน้อย</option>
+                                <option value="หวานมาก">หวานมาก</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" id="coffee10-extra" placeholder="เพิ่มเติม" 
+                                   class="w-full px-2 py-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-amber-500">
+                        </div>
+                        
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <button onclick="changeQuantity('coffee10', -1)" class="bg-red-500 hover:bg-red-600 text-white w-6 h-6 rounded-full text-xs">-</button>
+                            <span id="coffee10-qty" class="font-semibold text-sm">0</span>
+                            <button onclick="changeQuantity('coffee10', 1)" class="bg-green-500 hover:bg-green-600 text-white w-6 h-6 rounded-full text-xs">+</button>
+                        </div>
+                        <button onclick="showProductDetail('coffee10')" 
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 rounded text-xs">
+                            ดูรายละเอียด
+                        </button>
+                    </div>
+                </div>
+
+                <!-- สรุปคำสั่งซื้อ -->
+                <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-gray-100">
+                    <h3 class="text-2xl font-bold text-amber-800 mb-4">สรุปคำสั่งซื้อ</h3>
+                    <div id="order-summary" class="mb-4 min-h-[100px]">
+                        <p class="text-gray-500">ยังไม่มีรายการสั่งซื้อ</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="text-xl font-bold">รวม: <span id="total-price">0</span> บาท</div>
+                        <button onclick="submitOrder()" 
+                                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+                            สั่งซื้อ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้ารายละเอียดสินค้า -->
+    <div id="product-detail-page" class="page">
+        <div class="min-h-screen p-4 bg-gradient-to-br from-blue-50 to-indigo-50">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-amber-800">รายละเอียดสินค้า</h2>
+                        <button onclick="showPage('menu-page')" 
+                                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                            ← กลับ
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="text-center">
+                            <div id="product-emoji" class="text-9xl mb-4">☕</div>
+                            <div class="bg-amber-50 rounded-2xl p-6">
+                                <h3 class="text-2xl font-bold mb-2">คุณภาพพรีเมียม</h3>
+                                <p class="text-gray-600">เลือกสรรเมล็ดกาแฟคุณภาพสูง คั่วสดใหม่ทุกวัน</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 id="product-name" class="text-3xl font-bold text-amber-800 mb-4">กาแฟดำ</h3>
+                            <p id="product-price" class="text-2xl font-semibold text-green-600 mb-6">45 บาท</p>
+                            
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-2">📋 รายละเอียด</h4>
+                                    <p id="product-description" class="text-gray-600">กาแฟดำแท้ 100% รสชาติเข้มข้น หอมกรุ่น เหมาะสำหรับคนรักกาแฟแท้</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-2">🌟 ส่วนผสม</h4>
+                                    <p id="product-ingredients" class="text-gray-600">เมล็ดกาแฟอาราบิก้า 100%, น้ำบริสุทธิ์</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-2">⚡ คุณประโยชน์</h4>
+                                    <p id="product-benefits" class="text-gray-600">ช่วยเพิ่มความตื่นตัว, อุดมไปด้วยสารต้านอนุมูลอิสระ</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex space-x-4">
+                                <button onclick="addToCartFromDetail()" 
+                                        class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg">
+                                    🛒 เพิ่มลงตะกร้า
+                                </button>
+                                <button onclick="showPage('cart-page')" 
+                                        class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg">
+                                    ดูตะกร้า
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าตะกร้าสินค้า -->
+    <div id="cart-page" class="page">
+        <div class="min-h-screen p-4 bg-gradient-to-br from-green-50 to-emerald-50">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-blue-800">🛒 ตะกร้าสินค้า</h2>
+                        <button onclick="showPage('menu-page')" 
+                                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                            ← กลับเมนู
+                        </button>
+                    </div>
+                    
+                    <div id="cart-items" class="space-y-4 mb-8">
+                        <p class="text-gray-500 text-center py-8">ตะกร้าว่างเปล่า</p>
+                    </div>
+                    
+                    <div class="border-t pt-6">
+                        <div class="flex justify-between items-center text-2xl font-bold mb-6">
+                            <span>รวมทั้งหมด:</span>
+                            <span id="cart-total" class="text-green-600">0 บาท</span>
+                        </div>
+                        
+                        <div class="flex space-x-4">
+                            <button onclick="clearCart()" 
+                                    class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg">
+                                🗑️ ล้างตะกร้า
+                            </button>
+                            <button onclick="proceedToPayment()" 
+                                    class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg">
+                                💳 ดำเนินการชำระเงิน
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าชำระเงิน -->
+    <div id="payment-page" class="page">
+        <div class="min-h-screen p-4 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-green-800">💳 ชำระเงิน</h2>
+                        <button onclick="showPage('cart-page')" 
+                                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                            ← กลับ
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- สรุปคำสั่งซื้อ -->
+                        <div class="bg-gray-50 rounded-2xl p-6">
+                            <h3 class="text-xl font-bold mb-4">📋 สรุปคำสั่งซื้อ</h3>
+                            <div id="payment-summary" class="space-y-2 mb-4">
+                                <!-- รายการจะแสดงที่นี่ -->
+                            </div>
+                            <div class="border-t pt-4">
+                                <div class="flex justify-between text-xl font-bold">
+                                    <span>รวมทั้งหมด:</span>
+                                    <span id="payment-total" class="text-green-600">0 บาท</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- วิธีการชำระเงิน -->
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">💰 เลือกวิธีการชำระเงิน</h3>
+                            
+                            <div class="space-y-4">
+                                <!-- QR Code -->
+                                <div class="payment-method border-2 border-gray-200 rounded-xl p-4 cursor-pointer hover:border-blue-500 transition-colors" onclick="selectPaymentMethod('qr')">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="text-3xl">📱</div>
+                                        <div>
+                                            <h4 class="font-semibold">QR Code</h4>
+                                            <p class="text-gray-600 text-sm">สแกน QR Code เพื่อชำระเงิน</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- โอนเงินผ่านธนาคาร -->
+                                <div class="payment-method border-2 border-gray-200 rounded-xl p-4 cursor-pointer hover:border-blue-500 transition-colors" onclick="selectPaymentMethod('bank')">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="text-3xl">🏦</div>
+                                        <div>
+                                            <h4 class="font-semibold">โอนเงินผ่านธนาคาร</h4>
+                                            <p class="text-gray-600 text-sm">โอนเงินผ่านแอปธนาคาร</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- แลกแต้มสะสม -->
+                                <div class="payment-method border-2 border-gray-200 rounded-xl p-4 cursor-pointer hover:border-blue-500 transition-colors" onclick="selectPaymentMethod('points')">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="text-3xl">⭐</div>
+                                        <div>
+                                            <h4 class="font-semibold">แลกแต้มสะสม</h4>
+                                            <p class="text-gray-600 text-sm">คุณมีแต้มสะสม 1,250 แต้ม (125 บาท)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- รายละเอียดการชำระเงิน -->
+                            <div id="payment-details" class="mt-6 hidden">
+                                <!-- รายละเอียดจะแสดงตามวิธีที่เลือก -->
+                            </div>
+                            
+                            <button id="confirm-payment-btn" onclick="confirmPayment()" 
+                                    class="w-full mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg disabled:bg-gray-400" disabled>
+                                ✅ ยืนยันการชำระเงิน
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าสถานะการขนส่ง -->
+    <div id="shipping-page" class="page">
+        <div class="min-h-screen p-4 bg-gradient-to-br from-orange-50 to-yellow-50">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <h2 class="text-3xl font-bold text-purple-800">🚚 สถานะการขนส่ง</h2>
+                        <button onclick="showPage('menu-page')" 
+                                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                            กลับเมนู
+                        </button>
+                    </div>
+                    
+                    <!-- ข้อมูลคำสั่งซื้อ -->
+                    <div class="bg-gradient-to-r from-orange-100 to-yellow-100 rounded-2xl p-6 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div>
+                                <h4 class="font-semibold text-gray-700">หมายเลขคำสั่งซื้อ</h4>
+                                <p id="order-number" class="text-xl font-bold text-purple-800">#CF2024001</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">เวลาสั่งซื้อ</h4>
+                                <p id="order-time" class="text-lg text-gray-800">14:30 น.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-700">เวลาที่คาดว่าจะเสร็จ</h4>
+                                <p id="estimated-time" class="text-lg font-semibold text-green-600">15:00 น.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- แถบสถานะ -->
+                    <div class="relative mb-8">
+                        <div class="flex justify-between items-center">
+                            <div class="flex-1 h-2 bg-gray-200 rounded-full relative">
+                                <div id="progress-bar" class="h-full bg-gradient-to-r from-green-400 to-green-600 rounded-full transition-all duration-1000" style="width: 25%"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- จุดสถานะ -->
+                        <div class="flex justify-between mt-4">
+                            <div class="status-point active flex flex-col items-center">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mb-2">✓</div>
+                                <span class="text-sm font-medium text-green-600">รับคำสั่งซื้อ</span>
+                            </div>
+                            <div class="status-point active flex flex-col items-center">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mb-2">⚡</div>
+                                <span class="text-sm font-medium text-green-600">กำลังเตรียม</span>
+                            </div>
+                            <div class="status-point flex flex-col items-center">
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 font-bold mb-2">🔥</div>
+                                <span class="text-sm font-medium text-gray-500">กำลังปรุง</span>
+                            </div>
+                            <div class="status-point flex flex-col items-center">
+                                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-gray-500 font-bold mb-2">📦</div>
+                                <span class="text-sm font-medium text-gray-500">พร้อมรับ</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- รายละเอียดสถานะ -->
+                    <div class="bg-white rounded-2xl p-6 mb-6 border border-gray-100 shadow-sm">
+                        <h3 class="text-xl font-bold mb-4">📍 สถานะปัจจุบัน</h3>
+                        <div id="current-status" class="flex items-center space-x-4">
+                            <div class="text-4xl">⚡</div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-amber-600">กำลังเตรียมเครื่องดื่ม</h4>
+                                <p class="text-gray-600">บาริสต้าของเรากำลังเตรียมเครื่องดื่มของคุณด้วยความใส่ใจ</p>
+                                <p class="text-sm text-gray-500 mt-1">อัพเดทล่าสุด: เมื่อ 2 นาทีที่แล้ว</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- รายการสินค้า -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                        <h3 class="text-xl font-bold mb-4">📋 รายการที่สั่ง</h3>
+                        <div id="shipping-items" class="space-y-3">
+                            <!-- รายการจะแสดงที่นี่ -->
+                        </div>
+                    </div>
+                    
+                    <!-- ปุ่มติดตาม -->
+                    <div class="text-center mt-8">
+                        <button onclick="updateShippingStatus()" 
+                                class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg mr-4">
+                            🔄 อัพเดทสถานะ
+                        </button>
+                        <button onclick="showPage('menu-page')" 
+                                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-lg">
+                            🛒 สั่งเพิ่ม
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal แสดงผลการสั่งซื้อ -->
+    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4">
+            <div class="text-center">
+                <div class="text-6xl mb-4">✅</div>
+                <h3 class="text-2xl font-bold text-green-600 mb-4">สั่งซื้อสำเร็จ!</h3>
+                <p class="text-gray-600 mb-6">คำสั่งซื้อของคุณได้รับการบันทึกแล้ว</p>
+                <div class="flex space-x-4">
+                    <button onclick="closeOrderModal()" 
+                            class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg">
+                        ตกลง
+                    </button>
+                    <button onclick="goToShipping()" 
+                            class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-lg">
+                        ติดตามสถานะ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal QR Code -->
+    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">📱 สแกน QR Code</h3>
+            <div class="bg-gray-100 p-8 rounded-xl mb-4">
+                <div class="text-8xl">📱</div>
+                <p class="text-gray-600 mt-2">QR Code สำหรับชำระเงิน</p>
+                <p class="text-lg font-semibold mt-2">จำนวน: <span id="qr-amount">0</span> บาท</p>
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="closeQRModal()" 
+                        class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg">
+                    ยกเลิก
+                </button>
+                <button onclick="confirmQRPayment()" 
+                        class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg">
+                    ชำระเงินแล้ว
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลผู้ใช้ (จำลอง Google Sheets)
+        let users = [
+            { id: 1, username: 'admin', password: '123456', customerName: 'ผู้ดูแลระบบ', orders: '' },
+            { id: 2, username: 'demo', password: 'demo123', customerName: 'ลูกค้าทดสอบ', orders: '' },
+            { id: 3, username: 'test', password: 'test456', customerName: 'นายทดสอบ ระบบ', orders: '' },
+            { id: 4, username: 'user1', password: 'password', customerName: 'คุณสมชาย ใจดี', orders: 'กาแฟดำ x 2, ชาไทย x 1' }
+        ];
+        
+        let currentUser = null;
+        let orderCounter = 1;
+
+        // ข้อมูลเมนู
+        const menuItems = {
+            coffee1: { 
+                name: 'กาแฟดำ', 
+                price: 45, 
+                emoji: '☕',
+                description: 'กาแฟดำแท้ 100% รสชาติเข้มข้น หอมกรุ่น เหมาะสำหรับคนรักกาแฟแท้',
+                ingredients: 'เมล็ดกาแฟอาราบิก้า 100%, น้ำบริสุทธิ์',
+                benefits: 'ช่วยเพิ่มความตื่นตัว, อุดมไปด้วยสารต้านอนุมูลอิสระ'
+            },
+            coffee2: { 
+                name: 'กาแฟนม', 
+                price: 55, 
+                emoji: '🥛',
+                description: 'กาแฟดำผสมนมสดเข้มข้น รสชาติกลมกล่อม หวานมัน',
+                ingredients: 'เมล็ดกาแฟอาราบิก้า, นมสดแท้, น้ำตาลทราย',
+                benefits: 'ให้พลังงาน, อุดมไปด้วยแคลเซียมและโปรตีน'
+            },
+            coffee3: { 
+                name: 'กาแฟเย็น', 
+                price: 50, 
+                emoji: '❄️',
+                description: 'กาแฟเย็นสดชื่น เสิร์ฟพร้อมน้ำแข็ง เหมาะสำหรับวันร้อน',
+                ingredients: 'เมล็ดกาแฟอาราบิก้า, น้ำแข็ง, น้ำตาลทราย',
+                benefits: 'ช่วยคลายร้อน, เพิ่มความสดชื่น'
+            },
+            coffee4: { 
+                name: 'ชาเขียว', 
+                price: 40, 
+                emoji: '🍵',
+                description: 'ชาเขียวแท้จากใบชาคุณภาพสูง รสชาติหอมหวาน ดื่มง่าย',
+                ingredients: 'ใบชาเขียวแท้, น้ำร้อน, น้ำผึ้ง',
+                benefits: 'อุดมไปด้วยสารต้านอนุมูลอิสระ, ช่วยเผาผลาญ'
+            },
+            coffee5: { 
+                name: 'ชาไทย', 
+                price: 35, 
+                emoji: '🥤',
+                description: 'ชาไทยแท้รสชาติเข้มข้น หอมหวาน สีส้มสวยงาม',
+                ingredients: 'ใบชาไทยแท้, น้ำตาลทราย, นมข้นหวาน',
+                benefits: 'ให้พลังงาน, รสชาติหอมหวานเป็นเอกลักษณ์'
+            },
+            coffee6: { 
+                name: 'ชานมไข่มุก', 
+                price: 65, 
+                emoji: '🧋',
+                description: 'ชานมไข่มุกเหนียวนุ่ม รสชาติหอมหวาน เคี้ยวเพลิน',
+                ingredients: 'ชาดำ, นมสด, ไข่มุกแท้, น้ำตาลทราย',
+                benefits: 'ให้ความอิ่ม, รสชาติหลากหลายเนื้อสัมผัส'
+            },
+            coffee7: { 
+                name: 'ช็อกโกแลต', 
+                price: 60, 
+                emoji: '🍫',
+                description: 'ช็อกโกแลตเข้มข้น หอมหวาน ทำจากโกโก้แท้คุณภาพสูง',
+                ingredients: 'ผงโกโก้แท้, นมสด, น้ำตาลทราย, วิปครีม',
+                benefits: 'ช่วยเพิ่มความสุข, อุดมไปด้วยสารต้านอนุมูลอิสระ'
+            },
+            coffee8: { 
+                name: 'มัทฉะลาเต้', 
+                price: 70, 
+                emoji: '🍃',
+                description: 'มัทฉะแท้จากญี่ปุ่น รสชาติหอมหวาน เข้มข้น สีเขียวสวยงาม',
+                ingredients: 'ผงมัทฉะแท้, นมสด, น้ำตาลทราย',
+                benefits: 'อุดมไปด้วยสารต้านอนุมูลอิสระ, ช่วยเพิ่มสมาธิ'
+            },
+            coffee9: { 
+                name: 'ชามะนาว', 
+                price: 30, 
+                emoji: '🍋',
+                description: 'ชามะนาวสดชื่น เปรื้ยวหวาน ช่วยคลายร้อน ดับกระหาย',
+                ingredients: 'ใบชา, มะนาวสด, น้ำตาลทราย, น้ำแข็ง',
+                benefits: 'อุดมไปด้วยวิตามินซี, ช่วยเสริมภูมิคุ้มกัน'
+            },
+            coffee10: { 
+                name: 'เอสเปรสโซ่', 
+                price: 55, 
+                emoji: '🥃',
+                description: 'เอสเปรสโซ่เข้มข้น รสชาติแกร่ง เหมาะสำหรับคนรักกาแฟจริง',
+                ingredients: 'เมล็ดกาแฟอาราบิก้าคั่วเข้ม, น้ำร้อน',
+                benefits: 'ให้พลังงานสูง, ช่วยเพิ่มความตื่นตัวอย่างรวดเร็ว'
+            }
+        };
+
+        let cart = {};
+        let currentProductId = null;
+        let selectedPaymentMethod = null;
+        let shippingStatus = 1;
+        let orderNumber = '#CF2024001';
+
+        // ฟังก์ชันแสดงหน้า
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // ฟังก์ชันสมัครสมาชิก
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const customerName = document.getElementById('reg-customer-name').value;
+
+            // ตรวจสอบว่าชื่อผู้ใช้ซ้ำหรือไม่
+            if (users.find(user => user.username === username)) {
+                alert('ชื่อผู้ใช้นี้มีอยู่แล้ว กรุณาเลือกชื่อใหม่');
+                return;
+            }
+
+            // เพิ่มผู้ใช้ใหม่
+            const newUser = {
+                id: users.length + 1,
+                username: username,
+                password: password,
+                customerName: customerName,
+                orders: ''
+            };
+            
+            users.push(newUser);
+            
+            alert('สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ');
+            showPage('login-page');
+            
+            // ล้างฟอร์ม
+            document.getElementById('register-form').reset();
+        });
+
+        // ฟังก์ชันเข้าสู่ระบบ
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            // ตรวจสอบข้อมูลผู้ใช้
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                document.getElementById('customer-name-display').textContent = user.customerName;
+                showPage('menu-page');
+                
+                // ล้างฟอร์ม
+                document.getElementById('login-form').reset();
+            } else {
+                alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+            }
+        });
+
+        // ฟังก์ชันเปลี่ยนจำนวน
+        function changeQuantity(itemId, change) {
+            if (!cart[itemId]) {
+                cart[itemId] = 0;
+            }
+            
+            cart[itemId] += change;
+            
+            if (cart[itemId] < 0) {
+                cart[itemId] = 0;
+            }
+            
+            document.getElementById(itemId + '-qty').textContent = cart[itemId];
+            updateOrderSummary();
+            updateCartCount();
+        }
+
+        // ฟังก์ชันอัพเดทจำนวนสินค้าในตะกร้า
+        function updateCartCount() {
+            let totalItems = 0;
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                totalItems += quantity;
+            }
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        // ฟังก์ชันแสดงรายละเอียดสินค้า
+        function showProductDetail(itemId) {
+            currentProductId = itemId;
+            const item = menuItems[itemId];
+            
+            document.getElementById('product-emoji').textContent = item.emoji;
+            document.getElementById('product-name').textContent = item.name;
+            document.getElementById('product-price').textContent = item.price + ' บาท';
+            document.getElementById('product-description').textContent = item.description;
+            document.getElementById('product-ingredients').textContent = item.ingredients;
+            document.getElementById('product-benefits').textContent = item.benefits;
+            
+            showPage('product-detail-page');
+        }
+
+        // ฟังก์ชันเพิ่มสินค้าจากหน้ารายละเอียด
+        function addToCartFromDetail() {
+            if (currentProductId) {
+                changeQuantity(currentProductId, 1);
+                alert('เพิ่มสินค้าลงตะกร้าแล้ว!');
+            }
+        }
+
+        // ฟังก์ชันแสดงตะกร้าสินค้า
+        function updateCartDisplay() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartTotalSpan = document.getElementById('cart-total');
+            
+            let cartHTML = '';
+            let totalPrice = 0;
+            let hasItems = false;
+
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) {
+                    hasItems = true;
+                    const item = menuItems[itemId];
+                    const itemTotal = item.price * quantity;
+                    totalPrice += itemTotal;
+                    
+                    // ดึงข้อมูลความหวานและเพิ่มเติม
+                    const sweetness = document.getElementById(itemId + '-sweetness').value;
+                    const extra = document.getElementById(itemId + '-extra').value;
+                    
+                    let details = '';
+                    if (sweetness !== 'ปกติ' || extra) {
+                        details = ' (';
+                        if (sweetness !== 'ปกติ') details += sweetness;
+                        if (extra) {
+                            if (sweetness !== 'ปกติ') details += ', ';
+                            details += extra;
+                        }
+                        details += ')';
+                    }
+                    
+                    cartHTML += `
+                        <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="text-3xl">${item.emoji}</div>
+                                <div>
+                                    <h4 class="font-semibold">${item.name}${details}</h4>
+                                    <p class="text-gray-600">${item.price} บาท x ${quantity}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <button onclick="changeQuantityInCart('${itemId}', -1)" 
+                                        class="bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full">-</button>
+                                <span class="font-semibold text-lg">${quantity}</span>
+                                <button onclick="changeQuantityInCart('${itemId}', 1)" 
+                                        class="bg-green-500 hover:bg-green-600 text-white w-8 h-8 rounded-full">+</button>
+                                <span class="font-bold text-green-600 ml-4">${itemTotal} บาท</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            if (!hasItems) {
+                cartHTML = '<p class="text-gray-500 text-center py-8">ตะกร้าว่างเปล่า</p>';
+            }
+            
+            cartItemsDiv.innerHTML = cartHTML;
+            cartTotalSpan.textContent = totalPrice + ' บาท';
+        }
+
+        // ฟังก์ชันเปลี่ยนจำนวนในตะกร้า
+        function changeQuantityInCart(itemId, change) {
+            changeQuantity(itemId, change);
+            updateCartDisplay();
+        }
+
+        // ฟังก์ชันล้างตะกร้า
+        function clearCart() {
+            if (confirm('คุณต้องการล้างตะกร้าสินค้าทั้งหมดหรือไม่?')) {
+                cart = {};
+                Object.keys(menuItems).forEach(itemId => {
+                    document.getElementById(itemId + '-qty').textContent = '0';
+                    document.getElementById(itemId + '-sweetness').value = 'ปกติ';
+                    document.getElementById(itemId + '-extra').value = '';
+                });
+                updateOrderSummary();
+                updateCartCount();
+                updateCartDisplay();
+            }
+        }
+
+        // ฟังก์ชันไปหน้าชำระเงิน
+        function proceedToPayment() {
+            let hasItems = false;
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) {
+                    hasItems = true;
+                    break;
+                }
+            }
+
+            if (!hasItems) {
+                alert('กรุณาเลือกสินค้าก่อนดำเนินการชำระเงิน');
+                return;
+            }
+
+            updatePaymentSummary();
+            showPage('payment-page');
+        }
+
+        // ฟังก์ชันอัพเดทสรุปการชำระเงิน
+        function updatePaymentSummary() {
+            const summaryDiv = document.getElementById('payment-summary');
+            const totalSpan = document.getElementById('payment-total');
+            
+            let summaryHTML = '';
+            let totalPrice = 0;
+
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) {
+                    const item = menuItems[itemId];
+                    const itemTotal = item.price * quantity;
+                    totalPrice += itemTotal;
+                    
+                    const sweetness = document.getElementById(itemId + '-sweetness').value;
+                    const extra = document.getElementById(itemId + '-extra').value;
+                    
+                    let details = '';
+                    if (sweetness !== 'ปกติ' || extra) {
+                        details = ' (';
+                        if (sweetness !== 'ปกติ') details += sweetness;
+                        if (extra) {
+                            if (sweetness !== 'ปกติ') details += ', ';
+                            details += extra;
+                        }
+                        details += ')';
+                    }
+                    
+                    summaryHTML += `
+                        <div class="flex justify-between items-center py-2">
+                            <span>${item.name} x ${quantity}${details}</span>
+                            <span class="font-semibold">${itemTotal} บาท</span>
+                        </div>
+                    `;
+                }
+            }
+            
+            summaryDiv.innerHTML = summaryHTML;
+            totalSpan.textContent = totalPrice + ' บาท';
+        }
+
+        // ฟังก์ชันเลือกวิธีการชำระเงิน
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // ลบ active class จากทุกวิธี
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('border-blue-500', 'bg-blue-50');
+                el.classList.add('border-gray-200');
+            });
+            
+            // เพิ่ม active class ให้วิธีที่เลือก
+            event.currentTarget.classList.remove('border-gray-200');
+            event.currentTarget.classList.add('border-blue-500', 'bg-blue-50');
+            
+            // แสดงรายละเอียดการชำระเงิน
+            const detailsDiv = document.getElementById('payment-details');
+            const confirmBtn = document.getElementById('confirm-payment-btn');
+            
+            let detailsHTML = '';
+            
+            if (method === 'qr') {
+                detailsHTML = `
+                    <div class="bg-blue-50 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">📱 ชำระเงินผ่าน QR Code</h4>
+                        <p class="text-gray-600 text-sm">กดยืนยันเพื่อแสดง QR Code สำหรับชำระเงิน</p>
+                    </div>
+                `;
+            } else if (method === 'bank') {
+                detailsHTML = `
+                    <div class="bg-blue-50 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">🏦 โอนเงินผ่านธนาคาร</h4>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <p><strong>ธนาคาร:</strong> กสิกรไทย</p>
+                            <p><strong>เลขที่บัญชี:</strong> 123-4-56789-0</p>
+                            <p><strong>ชื่อบัญชี:</strong> ร้านกาแฟ Coffee Shop</p>
+                        </div>
+                    </div>
+                `;
+            } else if (method === 'points') {
+                const totalPrice = parseInt(document.getElementById('payment-total').textContent);
+                const availablePoints = 1250;
+                const pointsValue = Math.floor(availablePoints / 10);
+                
+                detailsHTML = `
+                    <div class="bg-blue-50 rounded-xl p-4">
+                        <h4 class="font-semibold mb-2">⭐ แลกแต้มสะสม</h4>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <p><strong>แต้มที่มี:</strong> ${availablePoints} แต้ม (${pointsValue} บาท)</p>
+                            <p><strong>ยอดที่ต้องชำระ:</strong> ${totalPrice} บาท</p>
+                            ${pointsValue >= totalPrice ? 
+                                '<p class="text-green-600 font-semibold">✅ แต้มเพียงพอสำหรับการชำระเงิน</p>' : 
+                                '<p class="text-red-600 font-semibold">❌ แต้มไม่เพียงพอ ต้องชำระเพิ่ม ' + (totalPrice - pointsValue) + ' บาท</p>'
+                            }
+                        </div>
+                    </div>
+                `;
+            }
+            
+            detailsDiv.innerHTML = detailsHTML;
+            detailsDiv.classList.remove('hidden');
+            confirmBtn.disabled = false;
+        }
+
+        // ฟังก์ชันยืนยันการชำระเงิน
+        function confirmPayment() {
+            if (!selectedPaymentMethod) {
+                alert('กรุณาเลือกวิธีการชำระเงิน');
+                return;
+            }
+            
+            if (selectedPaymentMethod === 'qr') {
+                showQRModal();
+            } else if (selectedPaymentMethod === 'bank') {
+                alert('กรุณาโอนเงินตามรายละเอียดที่แสดง และแจ้งชำระเงินที่เคาน์เตอร์');
+                processOrder();
+            } else if (selectedPaymentMethod === 'points') {
+                alert('ชำระเงินด้วยแต้มสะสมสำเร็จ!');
+                processOrder();
+            }
+        }
+
+        // ฟังก์ชันแสดง QR Modal
+        function showQRModal() {
+            const totalPrice = parseInt(document.getElementById('payment-total').textContent);
+            document.getElementById('qr-amount').textContent = totalPrice;
+            document.getElementById('qr-modal').classList.remove('hidden');
+            document.getElementById('qr-modal').classList.add('flex');
+        }
+
+        // ฟังก์ชันปิด QR Modal
+        function closeQRModal() {
+            document.getElementById('qr-modal').classList.add('hidden');
+            document.getElementById('qr-modal').classList.remove('flex');
+        }
+
+        // ฟังก์ชันยืนยันการชำระเงินผ่าน QR
+        function confirmQRPayment() {
+            closeQRModal();
+            alert('ชำระเงินผ่าน QR Code สำเร็จ!');
+            processOrder();
+        }
+
+        // ฟังก์ชันประมวลผลคำสั่งซื้อ
+        function processOrder() {
+            // สร้างหมายเลขคำสั่งซื้อใหม่
+            const now = new Date();
+            orderNumber = '#CF' + now.getFullYear() + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0') + String(Math.floor(Math.random() * 1000)).padStart(3, '0');
+            
+            // บันทึกข้อมูลคำสั่งซื้อ
+            let orderItems = [];
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) {
+                    const item = menuItems[itemId];
+                    const sweetness = document.getElementById(itemId + '-sweetness').value;
+                    const extra = document.getElementById(itemId + '-extra').value;
+                    
+                    let details = '';
+                    if (sweetness !== 'ปกติ' || extra) {
+                        details = ' (';
+                        if (sweetness !== 'ปกติ') details += sweetness;
+                        if (extra) {
+                            if (sweetness !== 'ปกติ') details += ', ';
+                            details += extra;
+                        }
+                        details += ')';
+                    }
+                    
+                    orderItems.push(`${item.name} x ${quantity}${details}`);
+                }
+            }
+
+            const orderString = orderItems.join(', ');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (users[userIndex].orders) {
+                users[userIndex].orders += '; ' + orderString;
+            } else {
+                users[userIndex].orders = orderString;
+            }
+
+            // อัพเดทข้อมูลการขนส่ง
+            updateShippingData();
+            
+            // แสดง Modal สำเร็จ
+            document.getElementById('order-modal').classList.remove('hidden');
+            document.getElementById('order-modal').classList.add('flex');
+
+            // ล้างตะกร้า
+            cart = {};
+            Object.keys(menuItems).forEach(itemId => {
+                document.getElementById(itemId + '-qty').textContent = '0';
+                document.getElementById(itemId + '-sweetness').value = 'ปกติ';
+                document.getElementById(itemId + '-extra').value = '';
+            });
+            updateOrderSummary();
+            updateCartCount();
+            
+            // รีเซ็ตการชำระเงิน
+            selectedPaymentMethod = null;
+            document.getElementById('confirm-payment-btn').disabled = true;
+            document.getElementById('payment-details').classList.add('hidden');
+        }
+
+        // ฟังก์ชันอัพเดทข้อมูลการขนส่ง
+        function updateShippingData() {
+            const now = new Date();
+            const orderTime = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ' น.';
+            const estimatedTime = new Date(now.getTime() + 30 * 60000); // เพิ่ม 30 นาที
+            const estimatedTimeStr = estimatedTime.getHours().toString().padStart(2, '0') + ':' + estimatedTime.getMinutes().toString().padStart(2, '0') + ' น.';
+            
+            document.getElementById('order-number').textContent = orderNumber;
+            document.getElementById('order-time').textContent = orderTime;
+            document.getElementById('estimated-time').textContent = estimatedTimeStr;
+            
+            // อัพเดทรายการสินค้าในหน้าขนส่ง
+            updateShippingItems();
+            
+            // รีเซ็ตสถานะการขนส่ง
+            shippingStatus = 1;
+        }
+
+        // ฟังก์ชันอัพเดทรายการสินค้าในหน้าขนส่ง
+        function updateShippingItems() {
+            const shippingItemsDiv = document.getElementById('shipping-items');
+            let itemsHTML = '';
+
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) {
+                    const item = menuItems[itemId];
+                    const sweetness = document.getElementById(itemId + '-sweetness').value;
+                    const extra = document.getElementById(itemId + '-extra').value;
+                    
+                    let details = '';
+                    if (sweetness !== 'ปกติ' || extra) {
+                        details = ' (';
+                        if (sweetness !== 'ปกติ') details += sweetness;
+                        if (extra) {
+                            if (sweetness !== 'ปกติ') details += ', ';
+                            details += extra;
+                        }
+                        details += ')';
+                    }
+                    
+                    itemsHTML += `
+                        <div class="flex items-center justify-between bg-white rounded-xl p-4 shadow-sm">
+                            <div class="flex items-center space-x-4">
+                                <div class="text-2xl">${item.emoji}</div>
+                                <div>
+                                    <h4 class="font-semibold">${item.name}${details}</h4>
+                                    <p class="text-gray-600 text-sm">จำนวน: ${quantity}</p>
+                                </div>
+                            </div>
+                            <div class="text-green-600 font-semibold">${item.price * quantity} บาท</div>
+                        </div>
+                    `;
+                }
+            }
+            
+            shippingItemsDiv.innerHTML = itemsHTML;
+        }
+
+        // ฟังก์ชันอัพเดทสถานะการขนส่ง
+        function updateShippingStatus() {
+            const statusMessages = [
+                { emoji: '✓', title: 'รับคำสั่งซื้อ', desc: 'เราได้รับคำสั่งซื้อของคุณแล้ว', progress: 25 },
+                { emoji: '⚡', title: 'กำลังเตรียมเครื่องดื่ม', desc: 'บาริสต้าของเรากำลังเตรียมเครื่องดื่มของคุณด้วยความใส่ใจ', progress: 50 },
+                { emoji: '🔥', title: 'กำลังปรุงเครื่องดื่ม', desc: 'เครื่องดื่มของคุณกำลังถูกปรุงด้วยความพิถีพิถัน', progress: 75 },
+                { emoji: '📦', title: 'พร้อมรับ', desc: 'เครื่องดื่มของคุณพร้อมแล้ว! กรุณามารับที่เคาน์เตอร์', progress: 100 }
+            ];
+            
+            if (shippingStatus < statusMessages.length) {
+                const currentStatus = statusMessages[shippingStatus];
+                
+                // อัพเดทแถบความคืบหน้า
+                document.getElementById('progress-bar').style.width = currentStatus.progress + '%';
+                
+                // อัพเดทสถานะปัจจุบัน
+                document.getElementById('current-status').innerHTML = `
+                    <div class="text-4xl">${currentStatus.emoji}</div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-amber-600">${currentStatus.title}</h4>
+                        <p class="text-gray-600">${currentStatus.desc}</p>
+                        <p class="text-sm text-gray-500 mt-1">อัพเดทล่าสุด: เมื่อสักครู่</p>
+                    </div>
+                `;
+                
+                // อัพเดทจุดสถานะ
+                const statusPoints = document.querySelectorAll('.status-point');
+                statusPoints.forEach((point, index) => {
+                    if (index <= shippingStatus) {
+                        point.classList.add('active');
+                        const circle = point.querySelector('div');
+                        const text = point.querySelector('span');
+                        circle.classList.remove('bg-gray-300');
+                        circle.classList.add('bg-green-500');
+                        circle.textContent = statusMessages[index].emoji;
+                        text.classList.remove('text-gray-500');
+                        text.classList.add('text-green-600');
+                    }
+                });
+                
+                shippingStatus++;
+                
+                if (shippingStatus >= statusMessages.length) {
+                    setTimeout(() => {
+                        alert('🎉 เครื่องดื่มของคุณพร้อมแล้ว! ขอบคุณที่ใช้บริการ');
+                    }, 1000);
+                }
+            } else {
+                alert('คำสั่งซื้อของคุณเสร็จสิ้นแล้ว!');
+            }
+        }
+
+        // ฟังก์ชันไปหน้าติดตามสถานะ
+        function goToShipping() {
+            closeOrderModal();
+            showPage('shipping-page');
+        }
+
+        // ฟังก์ชันอัพเดทสรุปคำสั่งซื้อ
+        function updateOrderSummary() {
+            const summaryDiv = document.getElementById('order-summary');
+            const totalPriceSpan = document.getElementById('total-price');
+            
+            let summary = '';
+            let totalPrice = 0;
+            let hasItems = false;
+
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) {
+                    hasItems = true;
+                    const item = menuItems[itemId];
+                    const itemTotal = item.price * quantity;
+                    totalPrice += itemTotal;
+                    
+                    // ดึงข้อมูลความหวานและเพิ่มเติม
+                    const sweetness = document.getElementById(itemId + '-sweetness').value;
+                    const extra = document.getElementById(itemId + '-extra').value;
+                    
+                    let details = '';
+                    if (sweetness !== 'ปกติ' || extra) {
+                        details = ' (';
+                        if (sweetness !== 'ปกติ') details += sweetness;
+                        if (extra) {
+                            if (sweetness !== 'ปกติ') details += ', ';
+                            details += extra;
+                        }
+                        details += ')';
+                    }
+                    
+                    summary += `<div class="flex justify-between items-center py-2 border-b">
+                        <span>${item.name} x ${quantity}${details}</span>
+                        <span>${itemTotal} บาท</span>
+                    </div>`;
+                }
+            }
+
+            if (!hasItems) {
+                summaryDiv.innerHTML = '<p class="text-gray-500">ยังไม่มีรายการสั่งซื้อ</p>';
+            } else {
+                summaryDiv.innerHTML = summary;
+            }
+            
+            totalPriceSpan.textContent = totalPrice;
+        }
+
+        // ฟังก์ชันสั่งซื้อ
+        function submitOrder() {
+            if (!currentUser) {
+                alert('กรุณาเข้าสู่ระบบก่อน');
+                return;
+            }
+
+            let orderItems = [];
+            let hasItems = false;
+
+            for (const [itemId, quantity] of Object.entries(cart)) {
+                if (quantity > 0) {
+                    hasItems = true;
+                    const item = menuItems[itemId];
+                    
+                    // ดึงข้อมูลความหวานและเพิ่มเติม
+                    const sweetness = document.getElementById(itemId + '-sweetness').value;
+                    const extra = document.getElementById(itemId + '-extra').value;
+                    
+                    let details = '';
+                    if (sweetness !== 'ปกติ' || extra) {
+                        details = ' (';
+                        if (sweetness !== 'ปกติ') details += sweetness;
+                        if (extra) {
+                            if (sweetness !== 'ปกติ') details += ', ';
+                            details += extra;
+                        }
+                        details += ')';
+                    }
+                    
+                    orderItems.push(`${item.name} x ${quantity}${details}`);
+                }
+            }
+
+            if (!hasItems) {
+                alert('กรุณาเลือกสินค้าก่อนสั่งซื้อ');
+                return;
+            }
+
+            // บันทึกคำสั่งซื้อ (จำลอง Google Sheets)
+            const orderString = orderItems.join(', ');
+            const userIndex = users.findIndex(u => u.id === currentUser.id);
+            
+            if (users[userIndex].orders) {
+                users[userIndex].orders += '; ' + orderString;
+            } else {
+                users[userIndex].orders = orderString;
+            }
+
+            // แสดง Modal สำเร็จ
+            document.getElementById('order-modal').classList.remove('hidden');
+            document.getElementById('order-modal').classList.add('flex');
+
+            // ล้างตะกร้า
+            cart = {};
+            Object.keys(menuItems).forEach(itemId => {
+                document.getElementById(itemId + '-qty').textContent = '0';
+                document.getElementById(itemId + '-sweetness').value = 'ปกติ';
+                document.getElementById(itemId + '-extra').value = '';
+            });
+            updateOrderSummary();
+        }
+
+        // ฟังก์ชันปิด Modal
+        function closeOrderModal() {
+            document.getElementById('order-modal').classList.add('hidden');
+            document.getElementById('order-modal').classList.remove('flex');
+        }
+
+        // ฟังก์ชันออกจากระบบ
+        function logout() {
+            currentUser = null;
+            cart = {};
+            Object.keys(menuItems).forEach(itemId => {
+                document.getElementById(itemId + '-qty').textContent = '0';
+                document.getElementById(itemId + '-sweetness').value = 'ปกติ';
+                document.getElementById(itemId + '-extra').value = '';
+            });
+            updateOrderSummary();
+            updateCartCount();
+            showPage('welcome-page');
+        }
+
+        // เมื่อเปิดหน้าตะกร้า
+        function showCartPage() {
+            updateCartDisplay();
+            showPage('cart-page');
+        }
+
+        // เริ่มต้นด้วยการอัพเดทสรุปคำสั่งซื้อ
+        updateOrderSummary();
+        updateCartCount();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'971676b623db4f52',t:'MTc1NTU3MzA4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
